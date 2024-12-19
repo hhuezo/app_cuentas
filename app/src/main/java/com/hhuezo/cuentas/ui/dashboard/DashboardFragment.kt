@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -66,6 +67,13 @@ class DashboardFragment : Fragment() {
         /*val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loadingProgressBar)
         loadingProgressBar.visibility = View.VISIBLE*/
 
+        val txtPrestado = view.findViewById<TextView>(R.id.txtPrestado)
+        val txtReintegrado = view.findViewById<TextView>(R.id.txtReintegrado)
+        val txtDineroInvertido = view.findViewById<TextView>(R.id.txtDineroInvertido)
+        val txtInteresReintegrado = view.findViewById<TextView>(R.id.txtInteresReintegrado)
+        val txtTotalFijoReintegrado = view.findViewById<TextView>(R.id.txtTotalFijoReintegrado)
+
+
         client.get("reportes/1", object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("API_ERROR", "Fallo al obtener los datos: ${e.message}")
@@ -90,11 +98,21 @@ class DashboardFragment : Fragment() {
                     val ganancias = dashboardResponse.gananciasPrestamo ?: emptyList()
                     val gananciasMes = dashboardResponse.gananciasPrestamoMes ?: emptyList()
 
-                    Log.d("ganancias", "ganancias " + ganancias.toString())
+                    val dataGeneral = dashboardResponse.dataGeneral ?: null
+
+                    if (dataGeneral != null) {
+                        txtPrestado.text="Total Prestado: $${dataGeneral.totalPrestado}"
+                        txtReintegrado.text="Total Reintegrado: $${dataGeneral.totalReintegrado}"
+                        txtDineroInvertido.text="Dinero invertido: $${dataGeneral.dineroInvertido}"
+                        txtInteresReintegrado.text="Intereses: $${dataGeneral.totalInteresReintegrado}"
+                        txtTotalFijoReintegrado.text="Total préstamo fijo: $${dataGeneral.totalFijoReintegrado}"
+                    }
+
+                    Log.d("dataGeneral", "ganancias " + dataGeneral.toString())
                     Log.d("gananciasMes", "gananciasMes " + gananciasMes.toString())
 
-                    // Configurar el gráfico de barras
-                    val barChart: BarChart = view.findViewById(R.id.barChart)
+                    // Configurar el gráfico de barras para Recibo
+                    val barChart: BarChart = view.findViewById(R.id.barChart) // Asegúrate de que este ID corresponda al gráfico de Recibo
 
                     val barEntries = ArrayList<BarEntry>()
 
@@ -122,7 +140,6 @@ class DashboardFragment : Fragment() {
                     // Formatear los valores sobre las barras a dos decimales y agregar el símbolo "$"
                     dataSet.valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
-                            // Formatear los valores con dos decimales y agregar el símbolo "$"
                             return "$" + String.format("%.2f", value)
                         }
                     }
@@ -130,7 +147,6 @@ class DashboardFragment : Fragment() {
                     val xAxis: XAxis = barChart.xAxis
                     xAxis.valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
-                            // Formateamos el valor del eje X con los meses de la respuesta de la API
                             return if (value.toInt() < gananciasMes.size) {
                                 gananciasMes[value.toInt()]
                             } else {
@@ -139,8 +155,70 @@ class DashboardFragment : Fragment() {
                         }
                     }
 
+                    // Eliminar la descripción predeterminada
+                    barChart.description.isEnabled = false
+
+                    // Desactivar la leyenda
+                    barChart.legend.isEnabled = false
+
                     barChart.invalidate() // Refrescar el gráfico
 
+                    // Datos de ReciboFijo
+                    val gananciasFijo = dashboardResponse.gananciasReciboFijo ?: emptyList()
+                    val gananciasMesFijo = dashboardResponse.gananciasReciboFijoMes ?: emptyList()
+
+                    Log.d("gananciasFijo", "gananciasFijo " + gananciasFijo.toString())
+                    Log.d("gananciasMesFijo", "gananciasMesFijo " + gananciasMesFijo.toString())
+
+                    // Configurar el gráfico de barras para ReciboFijo
+                    val barChartFijo: BarChart = view.findViewById(R.id.barChartFijo) // Asegúrate de que este ID corresponda al gráfico de ReciboFijo
+
+                    val barEntriesFijo = ArrayList<BarEntry>()
+
+                    // Llenar los datos de barras con los valores obtenidos de la API
+                    for (i in gananciasFijo.indices) {
+                        val value = gananciasFijo[i].toFloat()
+                        barEntriesFijo.add(BarEntry(i.toFloat(), value))
+                    }
+
+                    val dataSetFijo = BarDataSet(barEntriesFijo, "")
+                    //val barColors = listOf(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.CYAN, Color.MAGENTA)
+
+                    dataSetFijo.colors = barColors.take(barEntriesFijo.size)
+
+                    val barDataFijo = BarData(dataSetFijo)
+                    barChartFijo.data = barDataFijo
+                    barChartFijo.setFitBars(true)
+
+                    // Ajustar el tamaño del texto y hacerlo en negrita
+                    dataSetFijo.valueTextSize = 10f
+                    dataSetFijo.setValueTypeface(Typeface.DEFAULT_BOLD)
+
+                    // Formatear los valores sobre las barras a dos decimales y agregar el símbolo "$"
+                    dataSetFijo.valueFormatter = object : ValueFormatter() {
+                        override fun getFormattedValue(value: Float): String {
+                            return "$" + String.format("%.2f", value)
+                        }
+                    }
+
+                    val xAxisFijo: XAxis = barChartFijo.xAxis
+                    xAxisFijo.valueFormatter = object : ValueFormatter() {
+                        override fun getFormattedValue(value: Float): String {
+                            return if (value.toInt() < gananciasMesFijo.size) {
+                                gananciasMesFijo[value.toInt()]
+                            } else {
+                                ""
+                            }
+                        }
+                    }
+
+                    // Eliminar la descripción predeterminada
+                    barChartFijo.description.isEnabled = false
+
+                    // Desactivar la leyenda
+                    barChartFijo.legend.isEnabled = false
+
+                    barChartFijo.invalidate() // Refrescar el gráfico
                 } else {
                     requireActivity().runOnUiThread {
                         Toast.makeText(
@@ -152,6 +230,7 @@ class DashboardFragment : Fragment() {
                 }
             }
         })
+
 
 
 
