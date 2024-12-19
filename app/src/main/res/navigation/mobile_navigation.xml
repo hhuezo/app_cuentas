@@ -50,5 +50,10 @@
         android:name="com.hhuezo.cuentas.ui.prestamo.PrestamoShowFragment"
         android:label="fragment_prestamo_show"
         tools:layout="@layout/fragment_prestamo_show" />
+    <fragment
+        android:id="@+id/opcionesFragment"
+        android:name="com.hhuezo.cuentas.ui.opciones.OpcionesFragment"
+        android:label="fragment_opciones"
+        tools:layout="@layout/fragment_opciones" />
 
 </navigation>
