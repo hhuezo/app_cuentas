@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.hhuezo.cuentas.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/prestamoFragment"
+        android:name="com.hhuezo.cuentas.ui.prestamo.PrestamoFragment"
+        android:label="fragment_prestamo"
+        tools:layout="@layout/fragment_prestamo" >
+        <action
+            android:id="@+id/action_prestamoFragment_to_prestamoCreateFragment"
+            app:destination="@id/prestamoCreateFragment" />
+        <action
+            android:id="@+id/action_prestamoFragment_to_prestamoShowFragment"
+            app:destination="@id/prestamoShowFragment" >
+            <argument
+                android:name="id"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.hhuezo.cuentas.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.hhuezo.cuentas.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/prestamoCreateFragment"
+        android:name="com.hhuezo.cuentas.ui.prestamo.PrestamoCreateFragment"
+        android:label="fragment_prestamo_create"
+        tools:layout="@layout/fragment_prestamo_create" />
+    <fragment
+        android:id="@+id/prestamoShowFragment"
+        android:name="com.hhuezo.cuentas.ui.prestamo.PrestamoShowFragment"
+        android:label="fragment_prestamo_show"
+        tools:layout="@layout/fragment_prestamo_show" />
+
+</navigation>
