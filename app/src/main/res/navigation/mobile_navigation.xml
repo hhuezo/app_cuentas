@@ -54,6 +54,10 @@
         android:id="@+id/opcionesFragment"
         android:name="com.hhuezo.cuentas.ui.opciones.OpcionesFragment"
         android:label="fragment_opciones"
-        tools:layout="@layout/fragment_opciones" />
+        tools:layout="@layout/fragment_opciones" >
+        <action
+            android:id="@+id/action_opcionesFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
 
 </navigation>
