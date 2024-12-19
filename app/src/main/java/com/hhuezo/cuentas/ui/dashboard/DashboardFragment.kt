@@ -14,6 +14,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -26,6 +28,8 @@ import com.hhuezo.cuentas.databinding.FragmentDashboardBinding
 import com.hhuezo.cuentas.model.DashboardResponse
 import com.hhuezo.cuentas.model.HttpClient
 import com.hhuezo.cuentas.model.PrestamoAdapter
+import com.hhuezo.cuentas.model.PrestamoFinalizado
+import com.hhuezo.cuentas.model.PrestamoFinalizadoAdapter
 import com.hhuezo.cuentas.model.PrestamoResponse
 import okhttp3.Call
 import okhttp3.Callback
@@ -39,6 +43,9 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val client by lazy { HttpClient(requireActivity()) }
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var prestamosFinalizados: List<PrestamoFinalizado>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +81,10 @@ class DashboardFragment : Fragment() {
         val txtTotalFijoReintegrado = view.findViewById<TextView>(R.id.txtTotalFijoReintegrado)
 
 
+        recyclerView = view.findViewById(R.id.recyclerview)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+
         client.get("reportes/1", object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("API_ERROR", "Fallo al obtener los datos: ${e.message}")
@@ -94,6 +105,9 @@ class DashboardFragment : Fragment() {
 
                     val gson = Gson()
                     val dashboardResponse = gson.fromJson(responseData, DashboardResponse::class.java)
+
+
+
 
                     val ganancias = dashboardResponse.gananciasPrestamo ?: emptyList()
                     val gananciasMes = dashboardResponse.gananciasPrestamoMes ?: emptyList()
@@ -219,6 +233,22 @@ class DashboardFragment : Fragment() {
                     barChartFijo.legend.isEnabled = false
 
                     barChartFijo.invalidate() // Refrescar el gráfico
+
+
+
+                    val prestamosFinalizados = dashboardResponse.prestamosFinalizados ?: emptyList()
+
+                    Log.d("prestamosFinalizados", "prestamosFinalizados " + prestamosFinalizados.toString())
+
+                    requireActivity().runOnUiThread {
+
+                        // Configuramos el adaptador
+                        val adapter = PrestamoFinalizadoAdapter(prestamosFinalizados)
+                        recyclerView.adapter = adapter
+
+                    }
+
+
                 } else {
                     requireActivity().runOnUiThread {
                         Toast.makeText(

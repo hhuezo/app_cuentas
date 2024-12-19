@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- item_prestamo_finalizado.xml -->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:gravity="start">
+
+        <!-- Nombre destacado -->
+        <TextView
+            android:id="@+id/text_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+        <!-- LinearLayout para fecha y cantidad -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|end"
+            android:paddingTop="8dp">
+
+            <!-- Fecha -->
+            <TextView
+                android:id="@+id/text_fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_gravity="start" />
+
+            <!-- Cantidad (Resaltada) alineada a la derecha -->
+            <TextView
+                android:id="@+id/text_cantidad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cantidad"
+                android:textSize="16sp"
+                android:textColor="@android:color/holo_green_dark"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <!-- LinearLayout para Número de pagos y cantidadRecibo -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|end"
+            android:paddingTop="8dp">
+
+            <!-- Número de pagos -->
+            <TextView
+                android:id="@+id/text_numero_pagos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Número de pagos"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_gravity="start" />
+
+            <!-- Cantidad Recibo (alineada a la derecha) -->
+            <TextView
+                android:id="@+id/text_cantidad_recibo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cantidad Recibo"
+                android:textSize="16sp"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_tipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mensual"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

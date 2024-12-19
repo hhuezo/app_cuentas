@@ -8,7 +8,8 @@ data class DashboardResponse(
     @SerializedName("gananciasPrestamoMes") val gananciasPrestamoMes: List<String>?,
     @SerializedName("gananciasReciboFijo") val gananciasReciboFijo: List<Float>?,
     @SerializedName("gananciasReciboFijoMes") val gananciasReciboFijoMes: List<String>?,
-    val dataGeneral: DataGeneral?
+    val dataGeneral: DataGeneral?,
+    @SerializedName("prestamosFinalizados") val prestamosFinalizados: List<PrestamoFinalizado>?
 )
 
 
@@ -20,4 +21,15 @@ data class DataGeneral(
     val totalReintegrado: String,
     val totalInteresReintegrado: String,
     val totalFijoReintegrado: String
+)
+
+
+data class PrestamoFinalizado(
+    val id: Int?,
+    val fecha: String?,
+    val cantidad: String?,
+    @SerializedName("numeroPagos") val numeroPagos: Int?,
+    @SerializedName("cantidadRecibo") val cantidadRecibo: String?,
+    val nombre: String?,
+    val tipo: String?
 )
