@@ -46,7 +46,7 @@ class OpcionesFragment : Fragment() {
         val cardDashboard: CardView = view.findViewById(R.id.card_dashboard)
         cardDashboard.setOnClickListener {
             // Redireccion
-            val action = OpcionesFragmentDirections.actionOpcionesFragmentToNavigationDashboard()
+            val action = OpcionesFragmentDirections.actionOpcionesFragmentToDashboardFragment()
             findNavController().navigate(action)
         }
 

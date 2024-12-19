@@ -21,7 +21,7 @@
             app:destination="@id/prestamoCreateFragment" />
         <action
             android:id="@+id/action_prestamoFragment_to_prestamoShowFragment"
-            app:destination="@id/prestamoShowFragment" >
+            app:destination="@id/prestamoShowFragment">
             <argument
                 android:name="id"
                 app:argType="integer" />
@@ -35,11 +35,6 @@
         tools:layout="@layout/fragment_notifications" />
 
 
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.hhuezo.cuentas.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/prestamoCreateFragment"
         android:name="com.hhuezo.cuentas.ui.prestamo.PrestamoCreateFragment"
@@ -56,8 +51,13 @@
         android:label="fragment_opciones"
         tools:layout="@layout/fragment_opciones" >
         <action
-            android:id="@+id/action_opcionesFragment_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
+            android:id="@+id/action_opcionesFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.hhuezo.cuentas.ui.dashboard.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
 
 </navigation>
