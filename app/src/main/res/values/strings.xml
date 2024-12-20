@@ -3,8 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Préstamos</string>
     <string name="title_notifications">Más opciones</string>
-    <!--<string name="url">https://cuentas.corpweb.info/public/api/</string> -->
-    <string name="url">http://192.168.26.32/cuentas/public/api/</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="url">https://cuentas.corpweb.info/public/api/</string>
+    <!-- <string name="url">http://192.168.26.32/cuentas/public/api/</string> -->
+  <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
