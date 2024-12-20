@@ -43,12 +43,23 @@ class OpcionesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Más opciones"
+
         val cardDashboard: CardView = view.findViewById(R.id.card_dashboard)
         cardDashboard.setOnClickListener {
             // Redireccion
             val action = OpcionesFragmentDirections.actionOpcionesFragmentToDashboardFragment()
             findNavController().navigate(action)
         }
+
+        val cardPersona: CardView = view.findViewById(R.id.card_personas)
+        cardPersona.setOnClickListener {
+            // Redireccion
+            val action = OpcionesFragmentDirections.actionOpcionesFragmentToPersonaFragment()
+            findNavController().navigate(action)
+        }
+
+
 
     }
 

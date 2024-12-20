@@ -52,7 +52,11 @@ class PrestamoAdapter(
         estadoTextView.text = if (prestamo.estado == 1) "Activo" else "Finalizado"
         cuotaTextView.text = "Cuota: $" + prestamo.cuota
         deudaTextView.text = "Deuda: $" + prestamo.deuda
-        observacionTextView.text = prestamo.observacion
+
+        if (!prestamo.observacion.isNullOrEmpty()) {
+            observacionTextView.text = "Observación: ${prestamo.observacion}"
+            observacionTextView.visibility = View.VISIBLE
+        }
 
         holder.itemView.setOnClickListener {
             listener.onPrestamoClick(prestamo.id)

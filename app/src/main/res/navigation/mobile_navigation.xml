@@ -53,11 +53,40 @@
         <action
             android:id="@+id/action_opcionesFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_opcionesFragment_to_personaFragment"
+            app:destination="@id/personaFragment" />
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.hhuezo.cuentas.ui.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/personaFragment"
+        android:name="com.hhuezo.cuentas.ui.persona.PersonaFragment"
+        android:label="fragment_persona"
+        tools:layout="@layout/fragment_persona" >
+        <action
+            android:id="@+id/action_personaFragment_to_personaCreateFragment"
+            app:destination="@id/personaCreateFragment" />
+        <action
+            android:id="@+id/action_personaFragment_to_personaEditFragment"
+            app:destination="@id/personaEditFragment">
+            <argument
+                android:name="id"
+                app:argType="integer" /> <!-- Especifica el tipo de argumento -->
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/personaCreateFragment"
+        android:name="com.hhuezo.cuentas.ui.persona.PersonaCreateFragment"
+        android:label="fragment_persona_create"
+        tools:layout="@layout/fragment_persona_create" />
+    <fragment
+        android:id="@+id/personaEditFragment"
+        android:name="com.hhuezo.cuentas.ui.persona.PersonaEditFragment"
+        android:label="fragment_persona_edit"
+        tools:layout="@layout/fragment_persona_edit" />
 
 </navigation>
