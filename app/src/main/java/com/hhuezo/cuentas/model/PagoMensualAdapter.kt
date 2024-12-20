@@ -41,6 +41,10 @@ class PagoMensualAdapter(private val pagos: List<Pago>, private val listener: On
             holder.colorView.setBackgroundColor(Color.parseColor("#FFA500"))
         }
 
+        // Configura el listener para el ítem
+        holder.itemView.setOnClickListener {
+            pago.id?.let { it1 -> listener.onReportePagoClick(it1) }
+        }
 
     }
 

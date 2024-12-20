@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -24,7 +25,9 @@ import com.hhuezo.cuentas.R
 import com.hhuezo.cuentas.databinding.FragmentHomeBinding
 import com.hhuezo.cuentas.model.HttpClient
 import com.hhuezo.cuentas.model.PagoMensualAdapter
+import com.hhuezo.cuentas.model.PrestamoAdapter
 import com.hhuezo.cuentas.model.ResponsePagoData
+import com.hhuezo.cuentas.ui.prestamo.PrestamoFragmentDirections
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -37,7 +40,7 @@ import java.time.temporal.TemporalAdjusters
 import java.util.Calendar
 import java.util.Locale
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), PagoMensualAdapter.OnPagoMensualClickListener {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -120,13 +123,7 @@ class HomeFragment : Fragment() {
                     val pagos = pagosResponse?.data?.pagos ?: emptyList()
 
                     requireActivity().runOnUiThread {
-                        pagosRecyclerView?.adapter = PagoMensualAdapter(
-                            pagos,
-                            object : PagoMensualAdapter.OnPagoMensualClickListener {
-                                override fun onReportePagoClick(id: Int) {
-                                    // Aquí puedes manejar el clic en un elemento del RecyclerView si es necesario
-                                }
-                            })
+                        pagosRecyclerView?.adapter = PagoMensualAdapter(pagos,this@HomeFragment)
                         loadingProgressBar.visibility = View.GONE
                     }
                 } else {
@@ -242,6 +239,14 @@ class HomeFragment : Fragment() {
                                         object : PagoMensualAdapter.OnPagoMensualClickListener {
                                             override fun onReportePagoClick(id: Int) {
                                                 // Aquí puedes manejar el clic en un elemento del RecyclerView si es necesario
+                                                Log.e("API_ERROR", "este es el id: ${id}")
+                                                requireActivity().runOnUiThread {
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Este es el id : ${id}",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
                                             }
                                         })
                                     loadingProgressBar.visibility =
@@ -307,5 +312,11 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onReportePagoClick(id: Int) {
+        //Log.d("OnClickListener", "Elemento con ID: $id clickeado")
+        val action = HomeFragmentDirections.actionNavigationHomeToReciboRegistrarFragment(id)
+        findNavController().navigate(action)
     }
 }

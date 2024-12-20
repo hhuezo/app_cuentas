@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.hhuezo.cuentas.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_reciboRegistrarFragment"
+            app:destination="@id/reciboRegistrarFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/prestamoFragment"
@@ -109,6 +113,15 @@
         android:name="com.hhuezo.cuentas.ui.prestamo.ReciboCreateFragment"
         android:label="fragment_recibo_create"
         tools:layout="@layout/fragment_recibo_create" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/reciboRegistrarFragment"
+        android:name="com.hhuezo.cuentas.ui.prestamo.ReciboRegistrarFragment"
+        android:label="fragment_recibo_registrar"
+        tools:layout="@layout/fragment_recibo_registrar" >
         <argument
             android:name="id"
             app:argType="integer" />

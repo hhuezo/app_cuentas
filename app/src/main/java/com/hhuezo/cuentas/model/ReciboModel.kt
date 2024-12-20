@@ -24,3 +24,20 @@ data class ReciboCreate(
     val interes: String?,
     val total: String
 )
+
+
+data class ReciboRegistroResponse(
+    val success: Boolean,
+    val data: ReciboRegistro?
+)
+
+data class ReciboRegistro(
+    val id: Int,
+    val fecha: String?,
+    val nombre: String?,
+    val cantidad: String?,
+    val interes: String?,
+    val total: String?,
+    val estado: Int?,
+    val comprobante: String?
+)
