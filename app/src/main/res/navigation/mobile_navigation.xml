@@ -44,7 +44,14 @@
         android:id="@+id/prestamoShowFragment"
         android:name="com.hhuezo.cuentas.ui.prestamo.PrestamoShowFragment"
         android:label="fragment_prestamo_show"
-        tools:layout="@layout/fragment_prestamo_show" />
+        tools:layout="@layout/fragment_prestamo_show" >
+        <action
+            android:id="@+id/action_prestamoShowFragment_to_cargoCreateFragment"
+            app:destination="@id/cargoCreateFragment" />
+        <action
+            android:id="@+id/action_prestamoShowFragment_to_reciboCreateFragment"
+            app:destination="@id/reciboCreateFragment" />
+    </fragment>
     <fragment
         android:id="@+id/opcionesFragment"
         android:name="com.hhuezo.cuentas.ui.opciones.OpcionesFragment"
@@ -88,5 +95,23 @@
         android:name="com.hhuezo.cuentas.ui.persona.PersonaEditFragment"
         android:label="fragment_persona_edit"
         tools:layout="@layout/fragment_persona_edit" />
+    <fragment
+        android:id="@+id/cargoCreateFragment"
+        android:name="com.hhuezo.cuentas.ui.prestamo.CargoCreateFragment"
+        android:label="fragment_cargo_create"
+        tools:layout="@layout/fragment_cargo_create" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/reciboCreateFragment"
+        android:name="com.hhuezo.cuentas.ui.prestamo.ReciboCreateFragment"
+        android:label="fragment_recibo_create"
+        tools:layout="@layout/fragment_recibo_create" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

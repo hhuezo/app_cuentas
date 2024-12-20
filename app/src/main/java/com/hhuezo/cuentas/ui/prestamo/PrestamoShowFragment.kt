@@ -115,16 +115,16 @@ class PrestamoShowFragment : Fragment() {
 
 
             btnRecibo.setOnClickListener {
-                /*dialog.dismiss()
+                dialog.dismiss()
                 val action = PrestamoShowFragmentDirections.actionPrestamoShowFragmentToReciboCreateFragment(id)
-                findNavController().navigate(action)*/
+                findNavController().navigate(action)
 
             }
 
             btnCargo.setOnClickListener {
-               /* dialog.dismiss()
+                dialog.dismiss()
                 val action = PrestamoShowFragmentDirections.actionPrestamoShowFragmentToCargoCreateFragment(id)
-                findNavController().navigate(action)*/
+                findNavController().navigate(action)
 
             }
 
