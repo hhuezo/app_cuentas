@@ -48,7 +48,12 @@ class ReciboAdapter(private val recibos: List<Recibo>, private val listener: OnR
         // Asigna los datos del recibo a los elementos de la vista
         fechaTextView.text = recibo.fecha
         cantidadTextView.text = "$"+recibo.cantidad
-        observacionTextView.text = recibo.observacion
+        if (recibo.observacion.isNotEmpty()) {
+            observacionTextView.text = recibo.observacion
+            observacionTextView.visibility = View.VISIBLE
+        } else {
+            observacionTextView.visibility = View.GONE
+        }
 
         remanenteTextView.text = "Remanente: $"+recibo.remanente
         interesTextView.text = "Interes: $"+recibo.interes

@@ -26,7 +26,6 @@ import com.google.gson.reflect.TypeToken
 import com.hhuezo.cuentas.R
 import com.hhuezo.cuentas.databinding.FragmentReciboRegistrarBinding
 import com.hhuezo.cuentas.model.HttpClient
-import com.hhuezo.cuentas.model.ReciboCreateResponse
 import com.hhuezo.cuentas.model.ReciboRegistroResponse
 import okhttp3.Call
 import okhttp3.Callback
@@ -44,7 +43,6 @@ class ReciboRegistrarFragment : Fragment() {
     private var _binding: FragmentReciboRegistrarBinding? = null
     private val binding get() = _binding!!
 
-    private var estado_id: Int = 0
     private var id = 0
     private var rolId = "1"
     private val client by lazy { HttpClient(requireContext()) }

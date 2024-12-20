@@ -75,5 +75,6 @@ data class PrestamoShow(
     val tipo: String,
     val estado: Int,
     val pago_especifico: String,
-    val remanente: String
+    val remanente: String,
+    val comprobante: String?
 )
