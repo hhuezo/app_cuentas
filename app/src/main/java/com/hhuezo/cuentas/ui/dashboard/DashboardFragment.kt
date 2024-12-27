@@ -115,8 +115,8 @@ class DashboardFragment : Fragment() {
                     val dataGeneral = dashboardResponse.dataGeneral ?: null
 
                     if (dataGeneral != null) {
-                        txtPrestado.text="Total Prestado: $${dataGeneral.totalPrestado}"
-                        txtReintegrado.text="Total Reintegrado: $${dataGeneral.totalReintegrado}"
+                        txtPrestado.text="Total prestado: $${dataGeneral.totalPrestado}"
+                        txtReintegrado.text="Total reintegrado: $${dataGeneral.totalReintegrado}"
                         txtDineroInvertido.text="Dinero invertido: $${dataGeneral.dineroInvertido}"
                         txtInteresReintegrado.text="Intereses: $${dataGeneral.totalInteresReintegrado}"
                         txtTotalFijoReintegrado.text="Total préstamo fijo: $${dataGeneral.totalFijoReintegrado}"

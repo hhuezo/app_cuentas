@@ -35,12 +35,12 @@ class PersonaAdapter(
 
         // Asegúrate de tener los TextViews correspondientes en tu diseño de persona_item
         val nombreTextView: TextView = holder.view.findViewById(R.id.nombreTextView)
-        val telefonoTextView: TextView = holder.view.findViewById(R.id.telefonoTextView)
+        //val telefonoTextView: TextView = holder.view.findViewById(R.id.telefonoTextView)
 
 
         // Asigna los datos de la persona a los elementos de la vista
         nombreTextView.text = persona.nombre
-        telefonoTextView.text = persona.telefono ?: ""
+        //telefonoTextView.text = persona.telefono ?: ""
     }
 
     override fun getItemCount() = personas.size

@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_opcionesFragment_to_personaFragment"
             app:destination="@id/personaFragment" />
+        <action
+            android:id="@+id/action_opcionesFragment_to_prestamoFijoFragment"
+            app:destination="@id/prestamoFijoFragment" />
     </fragment>
     <fragment
         android:id="@+id/dashboardFragment"
@@ -126,5 +129,31 @@
             android:name="id"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/prestamoFijoFragment"
+        android:name="com.hhuezo.cuentas.ui.prestamo_fijo.PrestamoFijoFragment"
+        android:label="fragment_prestamo_fijo"
+        tools:layout="@layout/fragment_prestamo_fijo" >
+        <action
+            android:id="@+id/action_prestamoFijoFragment_to_prestamoFijoCreateFragment"
+            app:destination="@id/prestamoFijoCreateFragment" />
+        <action
+            android:id="@+id/action_prestamoFijoFragment_to_prestamoFijoShowFragment"
+            app:destination="@id/prestamoFijoShowFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/prestamoFijoCreateFragment"
+        android:name="com.hhuezo.cuentas.ui.prestamo_fijo.PrestamoFijoCreateFragment"
+        android:label="fragment_prestamo_fijo_create"
+        tools:layout="@layout/fragment_prestamo_fijo_create" />
+    <fragment
+        android:id="@+id/prestamoFijoShowFragment"
+        android:name="com.hhuezo.cuentas.ui.prestamo_fijo.PrestamoFijoShowFragment"
+        android:label="fragment_prestamo_fijo_show"
+        tools:layout="@layout/fragment_prestamo_fijo_show" />
 
 </navigation>

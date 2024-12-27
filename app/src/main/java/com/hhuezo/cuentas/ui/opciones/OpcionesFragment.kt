@@ -60,6 +60,16 @@ class OpcionesFragment : Fragment() {
         }
 
 
+        val cardPrestamoFijo: CardView = view.findViewById(R.id.card_prestamo_fijo)
+        cardPrestamoFijo.setOnClickListener {
+            // Redireccion
+            val action = OpcionesFragmentDirections.actionOpcionesFragmentToPrestamoFijoFragment()
+            findNavController().navigate(action)
+        }
+
+
+
+
 
     }
 
