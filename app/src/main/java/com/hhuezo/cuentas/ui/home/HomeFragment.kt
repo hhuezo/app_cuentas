@@ -2,6 +2,7 @@ package com.hhuezo.cuentas.ui.home
 
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -48,8 +49,23 @@ class HomeFragment : Fragment(), PagoMensualAdapter.OnPagoMensualClickListener {
 
     private val client by lazy { HttpClient(requireContext()) }
 
-    var userId = "1"
-    var rolId = "1"
+    var userId: String? = null
+    var rolId: String? = null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Acceder a SharedPreferences y obtener los valores
+        val sharedPreferences = requireContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        userId = sharedPreferences.getString("userId", "defaultUserId")
+        rolId = sharedPreferences.getString("rolId", "defaultRolId")
+
+        Log.d("preferecias","User ID: $userId, Rol ID: $rolId")
+
+        // Opcional: Imprimir los valores para verificar
+        println("User ID: $userId, Rol ID: $rolId")
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(

@@ -1,6 +1,7 @@
 package com.hhuezo.cuentas.ui.prestamo
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -37,7 +38,8 @@ class PrestamoShowFragment : Fragment() {
 
     private var estado_id: Int = 0
     private var id = 0
-    private var rolId = "1"
+    var userId: String? = null
+    var rolId: String? = null
     private val client by lazy { HttpClient(requireContext()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +62,12 @@ class PrestamoShowFragment : Fragment() {
 
         //opteniendo el id del fragment anterior
         id = arguments?.getInt("id") ?: 0
+
+
+        // Acceder a SharedPreferences y obtener los valores
+        val sharedPreferences = requireContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        userId = sharedPreferences.getString("userId", "defaultUserId")
+        rolId = sharedPreferences.getString("rolId", "defaultRolId")
 
         val URL = getString(R.string.url)
 

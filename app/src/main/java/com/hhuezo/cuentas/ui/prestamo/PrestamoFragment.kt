@@ -35,8 +35,8 @@ class PrestamoFragment : Fragment(), PrestamoAdapter.OnPrestamoClickListener {
 
     private var _binding: FragmentPrestamoBinding? = null
     private val binding get() = _binding!!
-    var userId = "1"
-    var rolId = "1"
+    var userId: String? = null
+    var rolId: String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +59,12 @@ class PrestamoFragment : Fragment(), PrestamoAdapter.OnPrestamoClickListener {
 
         val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loadingProgressBar)
         loadingProgressBar.visibility = View.VISIBLE
+
+
+        // Acceder a SharedPreferences y obtener los valores
+        val sharedPreferences = requireContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        userId = sharedPreferences.getString("userId", "defaultUserId")
+        rolId = sharedPreferences.getString("rolId", "defaultRolId")
 
 
         val fab: FloatingActionButton = view.findViewById(R.id.fab)

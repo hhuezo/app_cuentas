@@ -1,5 +1,6 @@
 package com.hhuezo.cuentas.ui.opciones
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,6 +22,9 @@ class OpcionesFragment : Fragment() {
 
     private var _binding: FragmentOpcionesBinding? = null
     private val binding get() = _binding!!
+
+    var userId: String? = null
+    var rolId: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,6 +49,11 @@ class OpcionesFragment : Fragment() {
 
         (requireActivity() as AppCompatActivity).supportActionBar?.title = "Más opciones"
 
+        // Acceder a SharedPreferences y obtener los valores
+        val sharedPreferences = requireContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        userId = sharedPreferences.getString("userId", "defaultUserId")
+        rolId = sharedPreferences.getString("rolId", "defaultRolId")
+
         val cardDashboard: CardView = view.findViewById(R.id.card_dashboard)
         cardDashboard.setOnClickListener {
             // Redireccion
@@ -61,6 +70,12 @@ class OpcionesFragment : Fragment() {
 
 
         val cardPrestamoFijo: CardView = view.findViewById(R.id.card_prestamo_fijo)
+
+        if(rolId != "01")
+        {
+            cardPrestamoFijo?.visibility = View.GONE
+        }
+
         cardPrestamoFijo.setOnClickListener {
             // Redireccion
             val action = OpcionesFragmentDirections.actionOpcionesFragmentToPrestamoFijoFragment()

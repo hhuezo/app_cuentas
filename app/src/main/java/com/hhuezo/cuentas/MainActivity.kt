@@ -1,5 +1,7 @@
 package com.hhuezo.cuentas
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,12 +14,27 @@ import com.hhuezo.cuentas.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Inicializar SharedPreferences
+        sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+
+        // Guardar valores en SharedPreferences
+        val editor = sharedPreferences.edit()
+        editor.putString("userId", "2")
+        editor.putString("rolId", "2")
+        editor.apply() // Confirma los cambios
+
+        // Leer valores de SharedPreferences
+        val userId = sharedPreferences.getString("userId", "defaultUserId")
+        val rolId = sharedPreferences.getString("rolId", "defaultRolId")
+        println("User ID: $userId, Rol ID: $rolId") // Imprimir para verificar
 
         val navView: BottomNavigationView = binding.navView
 
@@ -36,5 +53,4 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
 }

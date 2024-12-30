@@ -1,5 +1,6 @@
 package com.hhuezo.cuentas.ui.prestamo
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -44,7 +45,8 @@ class ReciboRegistrarFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var id = 0
-    private var rolId = "1"
+    var userId: String? = null
+    var rolId: String? = null
     private val client by lazy { HttpClient(requireContext()) }
 
     private lateinit var imageResultLauncher: ActivityResultLauncher<String>
@@ -54,6 +56,8 @@ class ReciboRegistrarFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+
+            Log.d("preferecias","User ID: $userId, Rol ID: $rolId")
 
         }
     }
@@ -72,6 +76,11 @@ class ReciboRegistrarFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = "Recibo"
 
 
+        // Acceder a SharedPreferences y obtener los valores
+        val sharedPreferences = requireContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        userId = sharedPreferences.getString("userId", "defaultUserId")
+        rolId = sharedPreferences.getString("rolId", "defaultRolId")
+
         id = arguments?.getInt("id") ?: 0
 
         val fechaEditText: EditText? = view.findViewById(R.id.fechaEditText)
@@ -88,6 +97,11 @@ class ReciboRegistrarFragment : Fragment() {
         val estadoSwitch: Switch? = view.findViewById(R.id.estadoSwitch)
 
         val aceptarButton: Button? = view.findViewById(R.id.aceptarButton)
+
+        // Ocultar el botón si rolId no es "1"
+        if (rolId != "1") {
+            aceptarButton?.visibility = View.GONE
+        }
 
         val endpoint = "recibo/$id/edit"
         Log.d("endpoint", endpoint ?: "")
