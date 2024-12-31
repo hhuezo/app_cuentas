@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         // Guardar valores en SharedPreferences
         val editor = sharedPreferences.edit()
-        editor.putString("userId", "2")
-        editor.putString("rolId", "2")
+        editor.putString("userId", "1")
+        editor.putString("rolId", "1")
         editor.apply() // Confirma los cambios
 
         // Leer valores de SharedPreferences

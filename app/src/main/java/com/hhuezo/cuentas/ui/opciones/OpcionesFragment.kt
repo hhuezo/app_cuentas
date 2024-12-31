@@ -71,7 +71,7 @@ class OpcionesFragment : Fragment() {
 
         val cardPrestamoFijo: CardView = view.findViewById(R.id.card_prestamo_fijo)
 
-        if(rolId != "01")
+        if(rolId != "1")
         {
             cardPrestamoFijo?.visibility = View.GONE
         }

@@ -118,11 +118,7 @@ class HomeFragment : Fragment(), PagoMensualAdapter.OnPagoMensualClickListener {
         pagosRecyclerView?.adapter = adapter
 
 
-
-
-
-
-        client.get("reportes?usuario_id=1&rol=1", object : Callback {
+        client.get("reportes?usuario_id=$userId&rol=$rolId", object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("API_ERROR", "Fallo al obtener los datos: ${e.message}")
                 loadingProgressBar.visibility = View.GONE
@@ -130,6 +126,8 @@ class HomeFragment : Fragment(), PagoMensualAdapter.OnPagoMensualClickListener {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseData = response.body?.string()
+
+                Log.d("endpoin","endpoint: reportes?usuario_id=$userId&rol=$rolId")
 
                 if (responseData != null) {
                     Log.d("API_RESPONSE", responseData)
